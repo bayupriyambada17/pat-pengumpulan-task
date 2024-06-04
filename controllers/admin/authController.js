@@ -3,6 +3,10 @@ const generateToken = require("../../lib/generateToken");
 const status = require("../../lib/status");
 const { users } = require("../../models");
 require('dotenv').config();
+
+const test = (req, res) => {
+  status(res, 200, 'Success');
+}
 const login = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -69,5 +73,5 @@ const logout = (req, res) => {
 }
 
 module.exports = {
-  login, me, logout
+  login, me, logout, test
 }

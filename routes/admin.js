@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const { login, me, logout } = require('../controllers/admin/authController');
+const { login, me, logout, test } = require('../controllers/admin/authController');
 const authentication = require('../middleware/authentication');
 const { listUsers, registerUser, countUser } = require('../controllers/admin/userController');
 const { listsTasks, createTask, updateTask, showTask, deleteTask } = require('../controllers/admin/tasksController');
 
+router.get('/test', test);
 router.post('/login', login);
 router.get('/me', authentication, me);
 router.post('/logout', authentication, logout);
