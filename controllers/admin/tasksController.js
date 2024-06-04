@@ -22,7 +22,6 @@ const listsTasks = async (req, res) => {
 
     status(res, 200, 'Success', allTask)
   } catch (error) {
-    console.error(error)
     status(res, 500, 'Internal Server Error')
   }
 }
@@ -38,7 +37,6 @@ const createTask = async (req, res) => {
     });
     status(res, 201, 'Success', create)
   } catch (error) {
-    console.error(error)
     status(res, 500, 'Internal Server Error')
 
   }
@@ -62,7 +60,6 @@ const showTask = async (req, res) => {
     );
     status(res, 200, 'Success Show Task', show)
   } catch (error) {
-    console.error(error)
     status(res, 500, 'Internal Server Error')
   }
 }
@@ -82,7 +79,6 @@ const updateTask = (req, res) => {
     }
     status(res, 200, 'Success Update Task: ' + title)
   } catch (error) {
-    console.error(error)
     status(res, 500, 'Internal Server Error')
   }
 }
@@ -109,7 +105,6 @@ const deleteTask = async (req, res) => {
 
     status(res, 200, 'Success Delete Task')
   } catch (error) {
-    console.error(error)
     status(res, 500, 'Internal Server Error')
   }
 }

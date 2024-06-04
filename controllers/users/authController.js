@@ -30,7 +30,6 @@ const login = async (req, res) => {
     });
 
   } catch (error) {
-    console.log(error);
     status(res, 500, 'Internal Server Error');
   }
 }
@@ -66,7 +65,6 @@ const logout = (req, res) => {
     // Logout sukses
     return status(res, 200, 'Logout Success');
   } catch (error) {
-    console.error(error);
     return status(res, 500, 'Internal Server Error');
   }
 }

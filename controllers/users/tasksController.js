@@ -11,7 +11,6 @@ const allTasks = async (req, res) => {
 
     status(res, 200, 'Success', all)
   } catch (error) {
-    console.error(error)
     status(res, 500, 'Internal Server Error')
   }
 }
@@ -36,7 +35,6 @@ const submit = async (req, res) => {
     }
     status(res, 200, 'Success Submit Task')
   } catch (error) {
-    console.error(error)
     status(res, 500, 'Internal Server Error')
   }
 }

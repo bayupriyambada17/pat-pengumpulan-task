@@ -12,7 +12,6 @@ const countUser = async (req, res) => {
     });
     status(res, 200, 'Success', { count });
   } catch (error) {
-    console.log(error);
     status(res, 500, 'Internal Server Error');
   }
 }
@@ -40,7 +39,6 @@ const listUsers = async (req, res) => {
     });
     status(res, 200, 'Success', allUsers);
   } catch (error) {
-    console.log(error);
     status(res, 500, 'Internal Server Error');
   }
 }
@@ -75,7 +73,6 @@ const registerUser = async (req, res) => {
 
     status(res, 201, 'Success Created User', userResponse);
   } catch (error) {
-    console.log(error);
     status(res, 500, 'Internal Server Error');
   }
 }
