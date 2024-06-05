@@ -48,7 +48,7 @@ const registerUser = async (req, res) => {
   try {
     const existingUser = await users.findOne({ where: { email } });
     if (existingUser) {
-      status(res, 'User already exists', 400);
+      status(res, 400, 'User already exists');
     }
 
     // Hash the password
