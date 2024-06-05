@@ -24,6 +24,9 @@ const login = async (req, res) => {
       roles: user.roles
     }
     const token = generateToken(user);
+    if (!token) {
+      status(res, 400, 'Authorization Failed');
+    }
     status(res, 200, 'Login success', {
       user: userResponse,
       token
@@ -36,7 +39,19 @@ const login = async (req, res) => {
 
 const me = async (req, res) => {
   try {
-    const user = await users.findByPk(req.user.id);
+    // // Mendapatkan token dari header Authorization
+    // const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
+    // if (!token) return status(res, 401, 'Token not provided');
+
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) status(res, 401, 'Token not provided');
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decoded) => {
+      if (err) status(res, 401, 'Invalid Token, Unauthorized');
+      return decoded;
+    });
+
+    const user = await users.findByPk(decoded.id);
     if (!user) status(res, 404, 'user Not Found');
     const userResource = {
       id: user.id,
