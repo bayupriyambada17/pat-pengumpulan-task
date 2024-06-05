@@ -39,26 +39,28 @@ const login = async (req, res) => {
 
 const me = async (req, res) => {
   try {
-    const token = req.headers?.authorization?.split(' ')[1];
+    const token = req.headers.authorization && req.headers.authorization?.split(' ')[1];
     if (!token) status(res, 401, 'Token not provided');
-    let decoded;
-    try {
-      decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    } catch (error) {
-      return status(res, 401, 'Invalid Token, Unauthorized');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    if (!decoded) status(res, 401, 'Invalid Token, Unauthorized');
+
+    // tampilkan user berdasarkan token jwt
+    const user = await user.findOne({
+      id: decoded.id,
+    })
+
+    if (!user) {
+      status(res, 404, 'User not found')
     }
 
-    const user = await users.findByPk(decoded.id);
-    if (!user) status(res, 404, 'user Not Found');
-    const userResource = {
+    const userResponse = {
       id: user.id,
       username: user.username,
       email: user.email,
-      roles: user.roles,
-    };
-    status(res, 200, 'Success', {
-      user: userResource
-    })
+      roles: user.roles
+    }
+
+    status(res, 200, 'Success Get Me', userResponse)
   } catch (error) {
     status(res, 500, 'Internal Server Error');
   }
