@@ -39,8 +39,11 @@ const login = async (req, res) => {
 
 const me = async (req, res) => {
   try {
-    const user = await user.findOne({
-      id: req.user.id,
+
+    const user = await users.findOne({
+      where: {
+        id: req.user.id
+      }
     });
 
     if (!user) {
