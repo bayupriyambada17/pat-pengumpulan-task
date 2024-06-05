@@ -1,5 +1,5 @@
 const status = require("../../lib/status")
-const { tasks, users, submitTask } = require("../../models");
+const { tasks, submitTask } = require("../../models");
 
 const allTasks = async (req, res) => {
   try {

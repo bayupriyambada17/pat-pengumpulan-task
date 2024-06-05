@@ -5,7 +5,8 @@ const {
 } = process.env
 
 async function authentication(req, res, next) {
-  const token = req.headers.authorization;
+  const token = req.headers && req.headers?.authorization;
+
   jwt.verify(token, JWT_SECRET_KEY, function (err, decoded) {
     if (err) {
       return res.status(401).json({

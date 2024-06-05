@@ -39,15 +39,9 @@ const login = async (req, res) => {
 
 const me = async (req, res) => {
   try {
-    const token = req.headers.authorization && req.headers.authorization?.split(' ')[1];
-    if (!token) status(res, 401, 'Token not provided');
-    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    if (!decoded) status(res, 401, 'Invalid Token, Unauthorized');
-
-    // tampilkan user berdasarkan token jwt
     const user = await user.findOne({
-      id: decoded.id,
-    })
+      id: req.user.id,
+    });
 
     if (!user) {
       status(res, 404, 'User not found')
